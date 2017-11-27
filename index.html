@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToDo-Liste</title>
+<style>
+body	{	background-color:snow;
+			border:1px solid black;
+			padding:10px;
+			width:315px;
+		}
+h1		{	font-size:28px;
+			font-family:verdana;
+			color:chocolate;
+			margin-top:0px;
+			margin-bottom:5px;
+		}
+form	{	color:DodgerBlue;
+			font-family:verdana;
+		}
+form.formtask {            
+			border:1px solid black;
+			border-bottom:none;
+			padding:5px;
+			width:calc(100% - 15px);
+		}
+form.formtask:last-child {
+			border-bottom:1px solid black;
+		}		
+label	{	font-family:verdana;
+			font-size:16px;
+		}
+.check	{	margin-right:5px;
+		}
+table	{	font-family:verdana;
+			font-size:16px;
+			width:100%;
+		}
+tr		{	
+		}
+td		{	border:1px solid black;
+			padding:5px;
+		}
+ul		{	list-style-type:square;
+			margin:5px;
+		}
+.task	{
+		
+		}
+</style>
+</head>
+<body>
+<h1>ToDo-Liste</h1>
+<br />
+<form>
+	<b>To Do:</b> 
+	<input type="text" id="task" placeholder="Neue Aufgabe" style="color:tomato;" autofocus="autofocus" />
+	<input type="button" id="addtask" value="Hinzufügen" title="Fügt die Aufgabe der Liste hinzu!" onclick="fcnaddtask()" />
+	<br /><br />
+</form>
+<!-- <form class="formtask">
+	<input type="checkbox" class="check" onclick="fcntaskdone()" />
+	<label for="check">Test</label>
+	<label for="check" style="float:right; font-size:13px;"><sub>27.11.2017</sub></label>
+</form>  -->
+
+<script type="text/javascript">
+
+var index=0;
+
+function fcnaddtask() {
+	var f = document.createElement("form");
+	f.setAttribute("class", "formtask");
+	
+	var i = document.createElement("input");
+	i.setAttribute("type", "checkbox");
+	i.setAttribute("class", "check");
+	i.setAttribute("onclick", "fcntaskdone()");
+	
+	var checkid = "check" + index++;
+	i.setAttribute("id", checkid);
+	
+	var l1 = document.createElement("label");
+	var lt1 = document.createTextNode(" " + document.getElementById("task").value);
+	l1.setAttribute("for", checkid);
+	l1.appendChild(lt1);	
+	
+	f.appendChild(i);
+	f.appendChild(l1);
+	
+	document.body.appendChild(f);
+}
+function fcntaskdone() {
+	
+}
+</script>
+
+</body>
+</html>
