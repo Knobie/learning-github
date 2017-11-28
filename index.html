@@ -5,96 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ToDo-Liste</title>
 <style>
-body	{	background-color:snow;
-			border:1px solid black;
-			padding:10px;
-			width:315px;
-		}
-h1		{	font-size:28px;
-			font-family:verdana;
-			color:chocolate;
-			margin-top:0px;
-			margin-bottom:5px;
-		}
-form	{	color:DodgerBlue;
-			font-family:verdana;
-		}
-form.formtask {            
-			border:1px solid black;
-			border-bottom:none;
-			padding:5px;
-			width:calc(100% - 15px);
-		}
-form.formtask:last-child {
-			border-bottom:1px solid black;
-		}		
-label	{	font-family:verdana;
-			font-size:16px;
-		}
-.check	{	margin-right:5px;
-		}
-table	{	font-family:verdana;
-			font-size:16px;
-			width:100%;
-		}
-tr		{	
-		}
-td		{	border:1px solid black;
-			padding:5px;
-		}
-ul		{	list-style-type:square;
-			margin:5px;
-		}
-.task	{
-		
-		}
+body	{background-color:snow; border:1px solid black; padding:10px; width:325px;}
+h1		{font-size:28px; font-family:verdana; color:chocolate; margin-top:0px; margin-bottom:5px;}
+div		{color:DodgerBlue; font-family:verdana; font-size:16px;}
+.task	{border:1px solid black; border-bottom:none; width:calc(100% - 15px); padding:5px; display: flex; justify-content: space-between;}
+.task:last-child	{border-bottom:1px solid black;}
+.check	{display: inline-block;}
+span	{color:DodgerBlue; font-family:verdana; font-size:16px; }
+.time	{font-size:smaller; vertical-align:sub;}
+/* form	{color:DodgerBlue; font-family:verdana;} */
+/* form.formtask 	{border:1px solid black; border-bottom:none; padding:5px; width:calc(100% - 15px);} */
+/* form.formtask:last-child {border-bottom:1px solid black;} */
+/* label	{font-family:verdana; font-size:16px;} */
+/* table	{font-family:verdana; font-size:16px; width:100%;} */
+/* tr		{} */
+/* td		{border:1px solid black; padding:5px;} */
+/* ul		{list-style-type:square; margin:5px;} */
+/* .task	{} */
 </style>
-</head>
-<body>
-<h1>ToDo-Liste</h1>
-<br />
-<form>
-	<b>To Do:</b> 
-	<input type="text" id="task" placeholder="Neue Aufgabe" style="color:tomato;" autofocus="autofocus" />
-	<input type="button" id="addtask" value="Hinzufügen" title="Fügt die Aufgabe der Liste hinzu!" onclick="fcnaddtask()" />
-	<br /><br />
-</form>
-<!-- <form class="formtask">
-	<input type="checkbox" class="check" onclick="fcntaskdone()" />
-	<label for="check">Test</label>
-	<label for="check" style="float:right; font-size:13px;"><sub>27.11.2017</sub></label>
-</form>  -->
-
 <script type="text/javascript">
 
 var index=0;
 
-function fcnaddtask() {
-	var f = document.createElement("form");
-	f.setAttribute("class", "formtask");
+function fcnAddTask() {
+	var d = document.createElement("div");
+	d.setAttribute("class", "task");
 	
 	var i = document.createElement("input");
 	i.setAttribute("type", "checkbox");
 	i.setAttribute("class", "check");
-	i.setAttribute("onclick", "fcntaskdone()");
-	
-	var checkid = "check" + index++;
+	i.setAttribute("onclick", "fcnTaskDone()");
+	var checkid = "check" + index++;  //text "check" + Zahl index++
 	i.setAttribute("id", checkid);
 	
-	var l1 = document.createElement("label");
-	var lt1 = document.createTextNode(" " + document.getElementById("task").value);
-	l1.setAttribute("for", checkid);
-	l1.appendChild(lt1);	
+	var d1 = document.createElement("div");
+	var dt1 = document.createTextNode(" " + document.getElementById("task").value);
+	d1.setAttribute("id", checkid);
+	d1.setAttribute("class", "check");
 	
-	f.appendChild(i);
-	f.appendChild(l1);
+	var time = Math.round(+new Date()/1000);
+	var d2 = document.createElement("div");
+	var dt2 = document.createTextNode(time);
+	d2.setAttribute("id", checkid);
+	d2.setAttribute("class", "time");
 	
-	document.body.appendChild(f);
+	d1.appendChild(dt1);
+	d2.appendChild(dt2);
+	d.appendChild(i);
+	d.appendChild(d1);
+	d.appendChild(d2);
+	document.body.appendChild(d);
 }
-function fcntaskdone() {
+function fcnTaskDone() {
 	
 }
 </script>
-
+</head>
+<body>
+<h1>ToDo-Liste</h1>
+<br />
+<div>
+	<b>To Do:</b> 
+	<input type="text" id="task" placeholder="Neue Aufgabe" style="color:tomato;" autofocus="autofocus" />
+	<input type="button" id="addtask" value="Hinzufügen" title="Fügt die Aufgabe der Liste hinzu!" onclick="fcnAddTask()" />
+	<br /><br />
+</div>
+ <div class="task">
+	<div>
+		<input type="checkbox" class="check" onclick="fcnTaskDone()" />
+		<div class="check">Test</div>
+	</div>
+	<div><span class="time">28.11.2017</span></div>
+</div>
+<!-- <form> -->
+<!-- 	<b>To Do:</b>  -->
+<!-- 	<input type="text" id="task" placeholder="Neue Aufgabe" style="color:tomato;" autofocus="autofocus" /> -->
+<!-- 	<input type="button" id="addtask" value="Hinzufügen" title="Fügt die Aufgabe der Liste hinzu!" onclick="fcnAddTask()" /> -->
+<!-- 	<br /><br /> -->
+<!-- </form> -->
+<!--  <form class="formtask"> -->
+<!-- 	<input type="checkbox" class="check" onclick="fcnTaskDone()" /> -->
+<!-- 	<div for="check">Test</div> -->
+<!-- 	<div for="check" style="float:right; font-size:smaller;"><sub>27.11.2017</sub></div> -->
+<!-- </form> -->
 </body>
 </html>
